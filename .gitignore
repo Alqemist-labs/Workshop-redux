@@ -32,7 +32,6 @@ Thumbs.db
 *.iml
 
 # Generated files
-public
 build
 
 # testing
