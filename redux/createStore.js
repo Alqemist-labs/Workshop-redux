@@ -13,7 +13,32 @@
 */
 
 const createStore = (reducer) => {
-  /* TODO */
+  let state;
+  let listeners = [];
+
+  const getState = () => state;
+
+  const subscribe = (callback) => {
+    listeners.push(callback);
+
+    return () => {
+      listeners = listeners.filter(listener => listener !== callback);
+    };
+  };
+
+  const dispatch = (action) => {
+    state = reducer(state, action);
+
+    listeners.forEach(listener => listener());
+  };
+
+  dispatch({});
+
+  return {
+    getState,
+    subscribe,
+    dispatch,
+  };
 };
 
 export default createStore;

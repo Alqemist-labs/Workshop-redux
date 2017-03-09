@@ -25,27 +25,33 @@ import { todosReducer, visibilityFilterReducer } from './reducers';
 /*
   10 - On va ensuite combiner nos deux reducers grâce à combineReducer
 */
-const reducer = /* TODO */
+const reducer = combineReducers({
+  todos: todosReducer,
+  visibilityFilter: visibilityFilterReducer,
+});
 
-const store = /* TODO */
+const store = createStore(reducer);
 
 /*
   11 - On prépare ensuite la fonction qui s'occupe de render toute notre app
 */
 
 const renderApp = () => {
-  /* TODO */
+  render(
+    <TodoApp dispatch={ store.dispatch } state={ store.getState() } />,
+    document.getElementById('root'),
+  );
 };
 
 /*
   12 - Et on subscribe au store en lui passant cette fonction, pour re-render à chaque modification du store
 */
-/* TODO */
+store.subscribe(renderApp);
 
 /*
   13 - On oublie pas de render notre app une première fois !
- */
-/* TODO */
+*/
+renderApp();
 
 /*
   14 - On peut maintenant faire un peu de refacto de nos composants pour faire nos actions creators (actions.js).
